@@ -260,6 +260,7 @@ def sign(info):
             boundFields = '{0}{1},'.format(boundFields, key)
     boundFields = boundFields.rstrip(',')
     info.update({'fieldSQxm_Name': data['fieldSQxm_Name']})
+    data = json.dumps(data)
     body = {
         "stepId": set_id,
         # actionId变量动态获取可能不对，可能会出错
@@ -303,7 +304,6 @@ def sign(info):
     response = requests.post(url=url, cookies=cookies, headers=headers, data=body)
 
     logger.info('请求/infoplus/interface/doAction文件成功')
-    logger.info(response.text)
     if not is_json(response.text):
         msg = '/infoplus/interface/doAction文件数据格式出错'
         logger.info(msg)
